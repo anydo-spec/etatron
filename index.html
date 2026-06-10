@@ -122,6 +122,23 @@
     .fleg{width:100%;text-align:center;border-top:1px solid var(--bdr);padding-top:18px;margin-top:14px;line-height:1.7}
     @media(max-width:960px){.pgrid{grid-template-columns:repeat(2,1fr)}.blayout,.alayout,.clayout{grid-template-columns:1fr}.bphoto{min-height:260px}.wgrid{grid-template-columns:1fr 1fr}.statsi{grid-template-columns:repeat(2,1fr)}.mitem-top{grid-template-columns:1fr}.mgrid2{grid-template-columns:1fr}}
     @media(max-width:600px){.navlinks{display:none}.pgrid{grid-template-columns:1fr}.wgrid{grid-template-columns:1fr}.frow{grid-template-columns:1fr}.hc{padding:0 22px}.statsi{grid-template-columns:repeat(2,1fr)}}
+  
+    /* CUSTOM BANNER */
+    .custom-banner{background:linear-gradient(135deg,rgba(45,106,79,.18) 0%,rgba(45,106,79,.06) 100%);border-top:1px solid var(--green);border-bottom:1px solid var(--bdr)}
+    .custom-banner-inner{max-width:1200px;margin:0 auto;padding:22px 28px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+    .cb-icon{font-size:28px;flex-shrink:0}
+    .cb-title{display:block;font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px}
+    .cb-text{font-size:13.5px;color:var(--tmid);line-height:1.6;max-width:680px}
+    .cb-btn{padding:10px 22px!important;font-size:13px!important;white-space:nowrap;flex-shrink:0;margin-left:auto}
+    @media(max-width:700px){.cb-btn{margin-left:0}}
+    /* SEARCH */
+    .search-wrap{position:relative;margin-bottom:28px;max-width:420px}
+    .search-input{width:100%;background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);padding:11px 16px 11px 42px;font-family:var(--fb);font-size:14px;color:var(--text);outline:none;transition:border-color .2s}
+    .search-input:focus{border-color:var(--green)}
+    .search-input::placeholder{color:var(--tdim)}
+    .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:15px;pointer-events:none}
+    .search-noresult{font-size:14px;color:var(--tmid);padding:12px 0;font-style:italic}
+    .pcard.hidden{display:none}
   </style>
 </head>
 <body>
@@ -209,9 +226,24 @@
   <div class="stat"><div class="snum">&#127470;&#127481;</div><div class="slbl" data-k="stat3">Official ETATRON distributor</div></div>
   <div class="stat"><div class="snum">CZ</div><div class="slbl" data-k="stat4">Own KOMO steam trap brand</div></div>
 </div></div>
+<div class="custom-banner">
+  <div class="custom-banner-inner">
+    <div class="cb-icon">⚙️</div>
+    <div>
+      <strong class="cb-title" data-k="custom_banner_title">Every component is made to order</strong>
+      <p class="cb-text" data-k="custom_banner_text">Because we tailor each component to your exact specifications, we don't operate as a standard e-shop. All orders are handled personally — contact us for a quote and we'll take care of the rest.</p>
+    </div>
+    <a href="#contact" class="cb-btn btn" data-k="nav_contact">Contact</a>
+  </div>
+</div>
 <section class="products" id="products"><div class="container">
   <div class="shead"><div class="slabel" data-k="prod_label">Our product range</div><h2 class="stitle" data-k="prod_title">Industrial fittings built on 30 years of expertise</h2><p class="slead" data-k="prod_lead">We develop and manufacture our own stainless-steel food-grade fittings.</p></div>
-  <div class="pgrid">
+  <div class="search-wrap">
+    <input type="text" class="search-input" id="productSearch" data-k="search_placeholder" placeholder="Search products…" oninput="filterProducts(this.value)"/>
+    <span class="search-icon">🔍</span>
+  </div>
+  <div id="searchNoResult" class="search-noresult" style="display:none"></div>
+  <div class="pgrid" id="productGrid">
     <div class="pcard" onclick="openM('m-brewery')"><div class="pcimg"><img src="https://midox.cz/wp-content/uploads/2018/09/midox_rotacni_sprcha_plocha.png" alt=""/></div><div class="pcbody"><div class="pccat" data-k="p1_cat">Brewery</div><h3 data-k="p1_title">Brewery Fittings</h3><p data-k="p1_desc">Complete range for fermentation and conditioning tanks.</p></div><div class="pcfoot"><div class="tags"><span class="tag">Stainless steel</span><span class="tag">CIP</span></div><span class="plink" data-k="details">Details →</span></div></div>
     <div class="pcard" onclick="openM('m-solenoid')"><div class="pcimg"><img src="https://midox.cz/wp-content/uploads/2019/05/midox-solenoidovy-ventil-vysoke-teploty-serie-SLA.jpg" alt=""/></div><div class="pcbody"><div class="pccat" data-k="p2_cat">Electromagnetic valves</div><h3 data-k="p2_title">Solenoid Valves</h3><p data-k="p2_desc">On/off valves for water, steam, air, CO&#8322; and other media. AISI 304.</p></div><div class="pcfoot"><div class="tags"><span class="tag">Water</span><span class="tag">Steam</span><span class="tag">AISI 304</span></div><span class="plink" data-k="details">Details →</span></div></div>
     <div class="pcard" onclick="openM('m-pumps')"><div class="pcimg"><img src="https://midox.cz/wp-content/uploads/2018/10/midox-davkovaci-cerpadlo-solenoidove-dlx-mamb01.jpg" alt=""/></div><div class="pcbody"><div class="pccat" data-k="p3_cat">Fluid dosing</div><h3 data-k="p3_title">Dosing Pumps</h3><p data-k="p3_desc">Official ETATRON distributor since 2006. Flow 1&ndash;1,027 l/h; up to 25 bar.</p></div><div class="pcfoot"><div class="tags"><span class="tag">ETATRON</span><span class="tag">1&ndash;1027 l/h</span></div><span class="plink" data-k="details">Details →</span></div></div>
@@ -611,7 +643,11 @@ const LANGS = {
     "send_enquiry": "Send enquiry",
     "free_sizing": "Send enquiry / free sizing",
     "req_catalogue": "Request catalogue / Send enquiry",
-    "pdf_sheet": "Product sheet (PDF)"
+    "pdf_sheet": "Product sheet (PDF)",
+    "custom_banner_title": "Every component is made to order",
+    "custom_banner_text": "Because we tailor each component to your exact specifications, we don't operate as a standard e-shop. All orders are handled personally — contact us for a quote and we'll take care of the rest.",
+    "search_placeholder": "Search products…",
+    "search_noresult": "No products found for"
   },
   "de": {
     "lang_name": "Deutsch",
@@ -819,7 +855,11 @@ const LANGS = {
     "send_enquiry": "Anfrage senden",
     "free_sizing": "Anfrage / kostenlose Auslegung",
     "req_catalogue": "Katalog / Anfrage senden",
-    "pdf_sheet": "Produktdatenblatt (PDF)"
+    "pdf_sheet": "Produktdatenblatt (PDF)",
+    "custom_banner_title": "Jedes Bauteil wird nach Maß gefertigt",
+    "custom_banner_text": "Da wir jedes Bauteil nach Ihren genauen Vorgaben fertigen, betreiben wir keinen Standard-Webshop. Alle Bestellungen werden persönlich abgewickelt — kontaktieren Sie uns für ein Angebot.",
+    "search_placeholder": "Produkte suchen…",
+    "search_noresult": "Keine Produkte gefunden für"
   },
   "es": {
     "lang_name": "Español",
@@ -1027,7 +1067,11 @@ const LANGS = {
     "send_enquiry": "Enviar consulta",
     "free_sizing": "Consulta / dimensionamiento gratuito",
     "req_catalogue": "Catálogo / Enviar consulta",
-    "pdf_sheet": "Ficha técnica (PDF)"
+    "pdf_sheet": "Ficha técnica (PDF)",
+    "custom_banner_title": "Cada componente se fabrica a medida",
+    "custom_banner_text": "Como adaptamos cada componente a sus especificaciones exactas, no operamos como una tienda online estándar. Todos los pedidos se gestionan personalmente — contáctenos para un presupuesto.",
+    "search_placeholder": "Buscar productos…",
+    "search_noresult": "No se encontraron productos para"
   },
   "hi": {
     "lang_name": "हिन्दी",
@@ -1235,7 +1279,11 @@ const LANGS = {
     "send_enquiry": "पूछताछ भेजें",
     "free_sizing": "पूछताछ / निःशुल्क साइजिंग",
     "req_catalogue": "कैटलॉग / पूछताछ भेजें",
-    "pdf_sheet": "उत्पाद पत्रक (PDF)"
+    "pdf_sheet": "उत्पाद पत्रक (PDF)",
+    "custom_banner_title": "हर घटक ऑर्डर पर बनाया जाता है",
+    "custom_banner_text": "क्योंकि हम हर घटक को आपकी सटीक विशिष्टताओं के अनुसार तैयार करते हैं, हम एक मानक ई-शॉप के रूप में काम नहीं करते। सभी ऑर्डर व्यक्तिगत रूप से संभाले जाते हैं — कोटेशन के लिए हमसे संपर्क करें।",
+    "search_placeholder": "उत्पाद खोजें…",
+    "search_noresult": "कोई उत्पाद नहीं मिला:"
   },
   "cs": {
     "lang_name": "Čeština",
@@ -1443,7 +1491,11 @@ const LANGS = {
     "send_enquiry": "Poslat dotaz",
     "free_sizing": "Dotaz / bezplatný návrh",
     "req_catalogue": "Katalog / Poslat dotaz",
-    "pdf_sheet": "Produktový list (PDF)"
+    "pdf_sheet": "Produktový list (PDF)",
+    "custom_banner_title": "Každý komponent upravujeme na míru",
+    "custom_banner_text": "Protože každý komponent přizpůsobujeme vašim přesným požadavkům, nefungujeme jako standardní e-shop. Všechny objednávky vyřizujeme osobně — kontaktujte nás pro cenovou nabídku a o zbytek se postaráme.",
+    "search_placeholder": "Hledat produkty…",
+    "search_noresult": "Žádné produkty nenalezeny pro"
   },
   "ru": {
     "lang_name": "Русский",
@@ -1651,7 +1703,11 @@ const LANGS = {
     "send_enquiry": "Отправить запрос",
     "free_sizing": "Запрос / бесплатный расчёт",
     "req_catalogue": "Каталог / отправить запрос",
-    "pdf_sheet": "Паспорт изделия (PDF)"
+    "pdf_sheet": "Паспорт изделия (PDF)",
+    "custom_banner_title": "Каждый компонент изготавливается на заказ",
+    "custom_banner_text": "Поскольку мы адаптируем каждый компонент под ваши точные требования, мы не работаем как стандартный интернет-магазин. Все заказы обрабатываются лично — свяжитесь с нами для получения предложения.",
+    "search_placeholder": "Поиск продуктов…",
+    "search_noresult": "Продукты не найдены для"
   },
   "hu": {
     "lang_name": "Magyar",
@@ -1859,7 +1915,11 @@ const LANGS = {
     "send_enquiry": "Megkeresés küldése",
     "free_sizing": "Megkeresés / ingyenes méretezés",
     "req_catalogue": "Katalógus / megkeresés küldése",
-    "pdf_sheet": "Termékadatlap (PDF)"
+    "pdf_sheet": "Termékadatlap (PDF)",
+    "custom_banner_title": "Minden alkatrészt egyedi igény szerint gyártunk",
+    "custom_banner_text": "Mivel minden alkatrészt az Ön pontos specifikációi szerint készítünk, nem működünk hagyományos webáruházként. Minden megrendelést személyesen kezelünk — kérjen árajánlatot és mi intézünk mindent.",
+    "search_placeholder": "Termékek keresése…",
+    "search_noresult": "Nem található termék:"
   }
 };
 
@@ -1891,6 +1951,9 @@ function setLang(lang) {
     o.classList.toggle('on', (o.getAttribute('onclick')||'').includes("'"+lang+"'") && o.getAttribute('onclick').includes('pickLang'));
   });
   document.title = t.page_title.replace(/&amp;/g,'&').replace(/&nbsp;/g,' ');
+  // reset search on lang change
+  var si = document.getElementById('productSearch');
+  if (si) { si.value = ''; filterProducts(''); }
   document.querySelectorAll('[data-k]').forEach(el => {
     const key = el.getAttribute('data-k');
     if (t[key] === undefined) return;
@@ -1923,6 +1986,29 @@ document.addEventListener('keydown',e=>{ if(e.key==='Escape') document.querySele
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{ const t=document.querySelector(a.getAttribute('href')); if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});} });
 });
+
+function filterProducts(val) {
+  var q = val.toLowerCase().trim();
+  var cards = document.querySelectorAll('#productGrid .pcard');
+  var visible = 0;
+  cards.forEach(function(card) {
+    var text = card.textContent.toLowerCase();
+    if (!q || text.includes(q)) {
+      card.classList.remove('hidden');
+      visible++;
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+  var noRes = document.getElementById('searchNoResult');
+  if (q && visible === 0) {
+    var t = LANGS[CL] || LANGS.en;
+    noRes.textContent = (t.search_noresult || 'No results for') + ' "' + val + '"';
+    noRes.style.display = 'block';
+  } else {
+    noRes.style.display = 'none';
+  }
+}
 </script>
 </body>
 </html>
